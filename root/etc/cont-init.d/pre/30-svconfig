@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# create empty config file and bail out, otherwise proceed and setup crond
+if [[ ! -f /config/.rclone.conf ]]; then
+  touch /config/.rclone.conf
+  chown abc:abc /config/.rclone.conf
+  echo "
+  Warning: No rclone config was detected!
+  Warning: An empty .rclone.conf configuration file has been placed in the /config path.
+  Warning: Please run this container with the 'config' parameter to configure a destination
+  Warning: and any encryption settings you may wish to use to protect your synchronized data files.
+  "
+  exit 1
+fi
+
+# replace default crontab with custom if provided
+if [[ -n "$CRON_SCHEDULE" ]]; then
+  printf "$CRON_SCHEDULE /etc/cont-init.d/jobs/rclone-cron-job.sh\n" > /defaults/rclone.cron
+  echo "Info: crontab => $(cat /defaults/rclone.cron)"
+else
+  printf "0 * * * * /etc/cont-init.d/jobs/rclone-cron-job.sh\n" > /defaults/rclone.cron
+  echo "Info: Using default hourly cron => $(cat /defaults/rclone.cron)"
+fi
+
+# set crontab for our user
+crontab -u abc /defaults/rclone.cron

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function setperms {
+# Set ownership and permissions on config and RClone data locations
+chown -R abc:abc \
+  /config \
+  /defaults \
+  /data \
+  /var/lock/rclone.lock
+
+}
+
+# set permissions
+setperms

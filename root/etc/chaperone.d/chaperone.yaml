@@ -1,0 +1,36 @@
+# Service definitions consumed by Chaperone
+prescript-perms.service: {
+  command: "/bin/sh -c 'chmod +x /etc/cont-init.d/pre/20-aclconfig /etc/cont-init.d/pre/30-svconfig /etc/cont-init.d/jobs/rclone-cron-job.sh'",
+  type: oneshot,
+  uid: root,
+  gid: root,
+}
+
+acl-config.service: {
+  after: prescript-perms.service,
+  command: "/bin/bash /etc/cont-init.d/pre/20-aclconfig",
+  type: oneshot,
+  uid: root,
+  gid: root,
+}
+
+daemon-config.service: {
+  after: acl-config.service,
+  command: "/bin/bash /etc/cont-init.d/pre/30-svconfig",
+  type: oneshot,
+  stdout: inherit,
+  stderr: inherit,
+  uid: root,
+  gid: root,
+}
+
+rclone-cron.service: {
+  after: daemon-config.service,
+  command: "/usr/sbin/crond -f -S -l 1 -c /etc/crontabs",
+  type: simple,
+  stdout: inherit,
+  stderr: inherit,
+  restart: true,
+  uid: root,
+  gid: root,
+}

@@ -5,10 +5,10 @@ ARG VERSION
 # Set label metadata
 LABEL org.label-schema.name="rclone-cron-daemon" \
       org.label-schema.description="Alpine Linux Docker Container running RClone utility with configurable cron schedule" \
-      org.label-schema.usage="https://github.com/madcatsu/docker-rclone-cron-daemon/blob/master/README.md" \
-      org.label-schema.url="https://github.com/madcatsu/docker-rclone-cron-daemon" \
+      org.label-schema.usage="https://gitlab.com/madcatsu/docker-rclone-cron-daemon/blob/master/README.md" \
+      org.label-schema.url="https://gitlab.com/madcatsu/docker-rclone-cron-daemon" \
       org.label-schema.version=$VERSION \
-      org.label-schema.vcs-url="https://github.com/madcatsu/docker-rclone-cron-daemon" \
+      org.label-schema.vcs-url="https://gitlab.com/madcatsu/docker-rclone-cron-daemon" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0"
 # global environment settings

@@ -1,0 +1,36 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+variables:
+  BUILD_IMAGE: $DOCKER_HUB_USER/rclone-cron-daemon
+
+stages:
+  - build
+  - release
+
+before_script:
+  - echo "$DOCKER_HUB_PASS" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+  - export VERSION=`cat VERSION`
+  - export COMMIT_HASH=$(echo $CI_COMMIT_SHA | cut -b -8)
+
+build:
+  stage: build
+  script:
+    - docker build --no-cache --pull --build-arg VERSION=$VERSION --build-arg VCS_REF=$COMMIT_HASH --tag "$BUILD_IMAGE":latest --tag "$BUILD_IMAGE:$VERSION" .
+  except:
+    - master
+  tags:
+    - docker
+
+release:
+  stage: release
+  script:
+    - docker build --no-cache --pull --build-arg VERSION=$VERSION --build-arg VCS_REF=$COMMIT_HASH --tag "$BUILD_IMAGE":latest --tag "$BUILD_IMAGE:$VERSION" .
+    - docker push "$BUILD_IMAGE":latest
+    - docker push "$BUILD_IMAGE:$VERSION"
+  only:
+    - master
+  tags:
+    - docker

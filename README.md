@@ -4,9 +4,7 @@ This is an Unofficial Docker container for the RClone utility based on freely av
 
 # RClone Cron Scheduler Docker Container
 
-[![](https://images.microbadger.com/badges/version/madcatsu/rclone-cron-daemon.svg)](https://hub.docker.com/r/madcatsu/rclone-cron-daemon) [![](https://images.microbadger.com/badges/image/madcatsu/rclone-cron-daemon.svg)](https://microbadger.com/images/madcatsu/rclone-cron-daemon)
-[![](https://images.microbadger.com/badges/commit/madcatsu/rclone-cron-daemon.svg)](https://microbadger.com/images/madcatsu/rclone-cron-daemon)
-[![](https://gitlab.com/madcatsu/docker-rclone-cron-daemon/badges/master/pipeline.svg)](https://gitlab.com/madcatsu/docker-rclone-cron-daemon/commits/master) [![](https://img.shields.io/docker/pulls/madcatsu/rclone-cron-daemon.svg)](https://hub.docker.com/r/madcatsu/rclone-cron-daemon)
+[![](https://images.microbadger.com/badges/version/madcatsu/rclone-cron-daemon.svg)](https://hub.docker.com/r/madcatsu/rclone-cron-daemon) [![](https://images.microbadger.com/badges/image/madcatsu/rclone-cron-daemon.svg)](https://microbadger.com/images/madcatsu/rclone-cron-daemon) [![](https://images.microbadger.com/badges/commit/madcatsu/rclone-cron-daemon.svg)](https://microbadger.com/images/madcatsu/rclone-cron-daemon) [![](https://gitlab.com/madcatsu/docker-rclone-cron-daemon/badges/master/pipeline.svg)](https://gitlab.com/madcatsu/docker-rclone-cron-daemon/commits/master) [![](https://img.shields.io/docker/pulls/madcatsu/rclone-cron-daemon.svg)](https://hub.docker.com/r/madcatsu/rclone-cron-daemon)
 
 ##### GitLab Repository - [https://gitlab.com/madcatsu/docker-rclone-cron-daemon](https://gitlab.com/madcatsu/docker-rclone-cron-daemon)
 

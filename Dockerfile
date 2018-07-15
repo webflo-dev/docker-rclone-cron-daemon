@@ -1,3 +1,21 @@
+FROM alpine:3.7 as builder
+ENV GOPATH="/go" \
+  PATH="$GOPATH/bin:/usr/local/go/bin:$PATH"
+RUN \
+  apk update && \
+  apk add --no-cache --update \
+    gcc \
+    git \
+    go \
+    libc-dev && \
+  mkdir /build && \
+# Fetch required sources & build
+  git clone https://github.com/ncw/rclone.git $GOPATH/src/github.com/ncw/rclone && \
+  cd $GOPATH/src/github.com/ncw/rclone && \
+  go get && \
+  go build -o /build/rclone && \
+  chmod 0755 /build/rclone
+
 FROM alpine:3.7
 # Build arguments
 ARG VCS_REF
@@ -11,16 +29,10 @@ LABEL org.label-schema.name="rclone-cron-daemon" \
       org.label-schema.vcs-url="https://gitlab.com/madcatsu/docker-rclone-cron-daemon" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.schema-version="1.0"
-# global environment settings
-ENV GOPATH="/go" \
-  PATH="$GOPATH/bin:/usr/local/go/bin:$PATH"
 # install base packages
-RUN apk update && \
+RUN \
+  apk update && \
   apk add --no-cache --update --virtual build-deps \
-    gcc \
-    git \
-    go \
-    libc-dev \
     python3-dev && \
   apk add --no-cache --update \
     bash \
@@ -35,12 +47,6 @@ RUN apk update && \
     /config \
     /defaults \
     /data && \
-# Fetch required sources & build
-  git clone https://github.com/ncw/rclone.git $GOPATH/src/github.com/ncw/rclone && \
-  cd $GOPATH/src/github.com/ncw/rclone && \
-  go get && \
-  go build -o /usr/local/bin/rclone && \
-  chmod +x /usr/local/bin/rclone && \
 # Prep rclone job lockfile
   touch /var/lock/rclone.lock && \
 # cleanup
@@ -48,10 +54,9 @@ RUN apk update && \
   rm -rf \
 	  /tmp/* \
 	  /var/tmp/* \
-	  /var/cache/apk/* && \
-# cleanup sources
-  rm -rf $GOPATH /usr/local/go
+	  /var/cache/apk/*
 # add local files
+COPY --from=builder /build/rclone /usr/local/bin/rclone
 COPY root/ /
 VOLUME ["/config","/data"]
 ENTRYPOINT ["/usr/bin/chaperone","--default-home","/config"]

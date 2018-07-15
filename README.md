@@ -184,3 +184,5 @@ Credit for the original container idea belongs to Github user [@tynor88](https:/
   - 1.0 - Container initial release - Replaces legacy version on Docker Hub
 + **2018/04/22:**
   - 1.1 - Migrates project to GitLab repo and GitLab CI
++ **2018/07/15:**
+  - 1.2 - Switched to builder pattern to further reduce container size

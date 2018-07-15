@@ -32,12 +32,11 @@ LABEL org.label-schema.name="rclone-cron-daemon" \
 # install base packages
 RUN \
   apk update && \
-  apk add --no-cache --update --virtual build-deps \
-    python3-dev && \
+#  apk add --no-cache --update --virtual build-deps \
+#    python3-dev && \
   apk add --no-cache --update \
     bash \
     ca-certificates \
-    curl \
     python3 && \
 # Install Chaperone as supervisor
   pip3 install --upgrade --no-cache pip && \
@@ -50,7 +49,7 @@ RUN \
 # Prep rclone job lockfile
   touch /var/lock/rclone.lock && \
 # cleanup
-  apk del build-deps && \
+#  apk del build-deps && \
   rm -rf \
 	  /tmp/* \
 	  /var/tmp/* \

@@ -36,6 +36,7 @@ RUN \
 #    python3-dev && \
   apk add --no-cache --update \
     bash \
+    curl \
     ca-certificates \
     python3 && \
 # Install Chaperone as supervisor

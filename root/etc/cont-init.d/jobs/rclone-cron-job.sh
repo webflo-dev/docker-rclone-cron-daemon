@@ -42,6 +42,6 @@
 
   if [ "$JOB_SUCCESS_URL" ]; then
     echo "Info: Reporting job success to health check endpoint"
-    curl -Ss --retry 3 $JOB_SUCCESS_URL
+    curl -Ss --retry 3 $JOB_SUCCESS_URL > /dev/null
   fi
 ) 200>/var/lock/rclone.lock

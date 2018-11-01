@@ -24,15 +24,15 @@
       echo "Error: Source or Destination options for rclone were not passed to the container."
       exit 13
     elif [ -n "$RCLONE_BANDWIDTH" ]; then
-      job_command="rclone --ask-password=false --config=/config/.rclone.conf --verbose $RCLONE_MODE --bwlimit $RCLONE_BANDWIDTH $RCLONE_SOURCE $RCLONE_DESTINATION"
+      job_command="rclone --ask-password=false --config=/config/.rclone.conf --verbose $RCLONE_MODE $RCLONE_SOURCE $RCLONE_DESTINATION --bwlimit $RCLONE_BANDWIDTH"
     elif [ -n "$RCLONE_FLAGS" ]; then
-      job_command="rclone --ask-password=false --config=/config/.rclone.conf --verbose $RCLONE_MODE $RCLONE_FLAGS $RCLONE_SOURCE $RCLONE_DESTINATION"
+      job_command="rclone --ask-password=false --config=/config/.rclone.conf --verbose $RCLONE_MODE $RCLONE_SOURCE $RCLONE_DESTINATION $RCLONE_FLAGS"
     elif [ -n "$RCLONE_BANDWIDTH" ] && [ -n "$RCLONE_FLAGS" ]; then
       if [ -z "$RCLONE_BANDWIDTH" ] || [ -z "$RCLONE_FLAGS" ]; then
         echo "Error: Rclone bandwidth or additional flags option was provided but no values were set."
         exit 14
       else
-        job_command="rclone --ask-password=false --config=config/.rclone.conf --verbose $RCLONE_MODE --bwlimit $RCLONE_BANDWIDTH $RCLONE_FLAGS $RCLONE_SOURCE $RCLONE_DESTINATION"
+        job_command="rclone --ask-password=false --config=config/.rclone.conf --verbose $RCLONE_MODE $RCLONE_SOURCE $RCLONE_DESTINATION $RCLONE_FLAGS --bwlimit $RCLONE_BANDWIDTH"
       fi
     fi
   fi

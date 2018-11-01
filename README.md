@@ -186,3 +186,5 @@ Credit for the original container idea belongs to Github user [@tynor88](https:/
   - 1.1 - Migrates project to GitLab repo and GitLab CI
 + **2018/07/15:**
   - 1.2 - Switched to builder pattern to further reduce container size
++ **2018/11/02:**
+  - 1.3 - Moved extra params to back of rclone command 

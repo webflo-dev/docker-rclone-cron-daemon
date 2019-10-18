@@ -190,3 +190,5 @@ Credit for the original container idea belongs to Github user [@tynor88](https:/
   - 1.3 - Moved extra params to back of rclone command
 + **2019/10/18:**
   - 1.4 - Bump Alpine version to 3.10
++ **2019/10/18:**
+  - 1.5 - Rollback to stable

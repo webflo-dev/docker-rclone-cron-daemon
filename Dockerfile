@@ -1,4 +1,4 @@
-FROM alpine:3.10 as builder
+FROM alpine:3.7 as builder
 ENV GOPATH="/go" \
   PATH="$GOPATH/bin:/usr/local/go/bin:$PATH"
 RUN \
@@ -16,7 +16,7 @@ RUN \
   go build -o /build/rclone && \
   chmod 0755 /build/rclone
 
-FROM alpine:3.10
+FROM alpine:3.7
 # Build arguments
 ARG VCS_REF
 ARG VERSION

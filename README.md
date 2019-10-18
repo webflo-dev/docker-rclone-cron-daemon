@@ -192,3 +192,5 @@ Credit for the original container idea belongs to Github user [@tynor88](https:/
   - 1.4 - Bump Alpine version to 3.10
 + **2019/10/18:**
   - 1.5 - Rollback to stable
++ **2019/10/18:**
+  - 1.6 - Alpine version bump and move to forked Chaperone version - thanks [@JGjorgji](https://github.com/JGjorgji/chaperone) !!!

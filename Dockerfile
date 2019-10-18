@@ -1,4 +1,4 @@
-FROM alpine:3.7 as builder
+FROM alpine:3.10 as builder
 ENV GOPATH="/go" \
   PATH="$GOPATH/bin:/usr/local/go/bin:$PATH"
 RUN \
@@ -16,7 +16,7 @@ RUN \
   go build -o /build/rclone && \
   chmod 0755 /build/rclone
 
-FROM alpine:3.7
+FROM alpine:3.10
 # Build arguments
 ARG VCS_REF
 ARG VERSION
@@ -38,10 +38,11 @@ RUN \
     bash \
     curl \
     ca-certificates \
+    git \
     python3 && \
 # Install Chaperone as supervisor
   pip3 install --upgrade --no-cache pip && \
-  pip3 install --no-cache chaperone && \
+  pip3 install --no-cache git+https://github.com/JGjorgji/chaperone.git && \
 # Create container user and directory structure
   mkdir -p \
     /config \
